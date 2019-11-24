@@ -28,7 +28,7 @@
     <nav>
     <table border="8px" align="right" style="width:6%;position:fixed;top:80px;right:0px;" >
     <tr>
-    <td align="right" bgcolor="aqua"><a href="admin_index.php"style='text-decoration:none;font-size:20px' <b>Go Back</b></a></td>
+    <td align="right" bgcolor="aqua"><a href="admin_index.php"style='width:8%;text-decoration:none;font-size:25px' <b>Go Back</b></a></td>
     </tr>
     </nav>
     </div>

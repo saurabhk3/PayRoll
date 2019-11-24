@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title> Add Department</title>
+    <title> Search Employee</title>
     <style>
     .button {
     background-color: #e7e7e7; color: black
@@ -52,14 +52,14 @@ input[type=text]:focus {
     <form action='view.php' method = 'post' align='center' style='font-size:25px'>
         <div align='center' >
                 <label style='color:green;'>Enter Employee ID</label>
-                <input style='font-size:25px;' type='text' name='serch_id' placeholder=' EMP01' ><br>
+                <input style='font-size:25px;' type='text' name='search_id' placeholder=' EMP01' ><br>
                 <label style='color:red; align:center;'> OR</label><br>
                 <label style='color:green;'>Enter Name &nbsp;&nbsp;</label>
                 <input style='font-size:25px;' type='text' name='search_name' placeholder=' Mr.X' >
         </div>
         <br><br>
         <div align='center'>
-        <button class="button">&nbsp;Search&nbsp;</button>
+        <button class="button" name="search">&nbsp;Search&nbsp;</button>
         </p>
     </form>
 </div>

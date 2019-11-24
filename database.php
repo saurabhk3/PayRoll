@@ -64,6 +64,14 @@
     //     echo"Error receipt \n".$connection->error;
     // }    
     
+    $d = "CREATE TABLE LEAVE_RECORD (E_ID VARCHAR(6),FMLA INT(6), Maternity INT(6), Personal INT(6))";
+    if(mysqli_query($connection,$d)){
+        echo"Created";
+        echo"<tr>Yes </tr>";
+    }else{
+        echo"Can't create";
+        echo"<tr>No </tr>";
+    }
 
     if(mysqli_close($connection)){
         echo"Closed\n";

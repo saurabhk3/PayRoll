@@ -31,10 +31,14 @@
             $_SESSION['username'] = $username;
             $_SESSION['success'] = "Logged in Successfuly";
             header('location:admin_index.php');
-            $flg =0;
-        }else{
-            $flg = 1;
-            array_push($errors,"Username or Password is incorrect");
+           
+        }else{   // displays an alert 
+            echo"<html>
+            <script> 
+            alert('Input Required!');
+            </script>
+                </body>
+                </html>";
         } 
     }
 
@@ -56,8 +60,12 @@
         $results_dep = mysqli_query($con,$check_dup_dep);
         $result_dep = mysqli_fetch_assoc($results_dep);
         if($result_dep){
-            //header('location:error.php');  // to be created such that errors can be displayed
-            echo"An entry with same ID or Name already exists";
+            echo"<html>
+            <script> 
+            alert('An entry with same ID or name already exists');
+            </script>
+                </body>
+                </html>";
         }else{
             $q_dep = "INSERT INTO DEPARTMENT (D_ID,D_NAME) VALUES('$new_dept_id','$new_dept_name')";
             if(mysqli_query($con,$q_dep)){
@@ -92,27 +100,27 @@
         $results_dep_emp = mysqli_query($con,$check_dup_dep_emp);
         $result_dep_emp = mysqli_fetch_assoc($results_dep_emp);
         if(!$result_dep_emp){
-            echo"Department does not exists";
+            echo"<html>
+            <script> 
+            alert('Department doesn't exists');
+            </script>
+                </body>
+                </html>";
         }else{
             if($result_emp ){
-                // header('location:error.php');// to be created such that errors can be displayed
-                echo"An employee with same ID exists";
+                echo"<html>
+            <script> 
+            alert('An employee with same ID exists!');
+            </script>
+                </body>
+                </html>";
             }else{
                 $q_emp ="INSERT INTO EMPLOYEE (E_ID,E_Name,Email,DoB,Age,SEX,Bank_Acct,DoJ,D_ID)
                                         VALUES('$e_id','$e_name','$e_email','$e_dob','$e_age','$e_sex','$e_act','$e_doj','$e_did')";
                 if(mysqli_query($con,$q_emp)){
                     echo"Employee record inserted";
                 
-                // now we have to insert corresponding records in LEAVE and PAYROLL TABLE
-                // initialiasing Leave(E_ID,FMLA,Maternity,Person)
-                $start_val = 0;
-                $init = "INSERT INTO LEAVES (E_ID,FMLA,Maternity,Person) VALUES 
-                            ('$e_id','$start_val','$start_val','$start_val')";
-                if(mysqli_query($con,$init)){
-                    echo"Inserted LEAVE";
-                }else{
-                    echo"FAiled LEave";
-                }
+                
                 // adding data to PAYROLL TABLE(P_ID,E_ID,Gross_Salary,Basic_Salary,ALLOWANCE,DEDUCTION,TAX,NET_SALARY)
                 
                 $p_id = mysqli_real_escape_string($con,$_POST['e_pid']);
@@ -130,11 +138,35 @@
                 if(mysqli_query($con,$pay_query)){
                     echo"Successfull PAyroll";
                 }else{
-                    echo"Failed PAyroll";
+                    echo"<html>
+            <script> 
+            alert('Failed Payroll entry');
+            </script>
+                </body>
+                </html>";
                 }
+                // now we have to insert corresponding records in LEAVE and PAYROLL TABLE
+                // initialiasing Leave(E_ID,FMLA,Maternity,Person)
+                $val = 0;
+                $q = "INSERT INTO LEAVE_RECORD (E_ID,FMLA,Maternity,Personal) VALUES('EMP01',$val,$val,$val)";
+                    if(mysqli_query($con,$q)){
+                        echo"Leave inserted ";
+                    }else{
+                        echo"<html>
+            <script> 
+            alert('Leave Failed');
+            </script>
+                </body>
+                </html>";
+                    }
 
             }else{
-                echo"Employee failed" .$con->error;
+                echo"<html>
+            <script> 
+            alert('Employee Failed');
+            </script>
+                </body>
+                </html>";
                 }
             }
         }
@@ -151,12 +183,78 @@
             if(mysqli_query($con,$del)){
                 echo"succesfully deleted";
             }else{
-                echo"failed!" .$con->error;
+                echo"<html>
+            <script> 
+            alert('Can not delete!Failed');
+            </script>
+                </body>
+                </html>";
             } 
         }else{
-            echo"employee does not exists";
+            echo"<html>
+            <script> 
+            alert('Employee does not exists);
+            </script>
+                </body>
+                </html>";
         }
 
+    }
+
+    /////////////////////////////////SEARCH (view.php)////////////////////////////////
+
+    if(isset($_POST['search'])){
+        $s_id = mysqli_real_escape_string($con,$_POST['search_id']);
+        $s_name = mysqli_real_escape_string($con,$_POST['search_name']);
+
+        if(empty($s_id) && empty($s_name)){
+            echo"<html>
+            <script> 
+            alert('Input Required!');
+            </script>
+                </body>
+                </html>";
+        }else if(!empty($s_id)){
+            $find = "SELECT * FROM EMPLOYEE WHERE E_ID='$s_id'";  // query so that it contains all info (PAYROLL,LEaVE_RECORD)
+            $result = mysqli_query($con,$find);
+            if(mysqli_num_rows($result)>0){
+                echo "<table style='position:fixed;top:600px;left:50px;'>
+                <tr><th>ID</th><th>Name</th><th>Email</th></tr>";
+                while($row = mysqli_fetch_assoc($result)){
+                    echo "<tr><td>".$row['E_ID']."</td><td>".$row['E_Name']."</td><td>".$row['Email']."</td></tr>";
+                }
+                echo"</table";
+            }else{
+                echo"<html>
+            <script> 
+            alert('0 Rows : No such Employee');
+            </script>
+                </body>
+                </html>";
+            }
+        }
+          
+        }else if(!empty($s_name)){
+            $find = "SELECT * FROM EMPLOYEE WHERE E_Name='$s_name'";  // query so that it contains all info (PAYROLL,LEaVE_RECORD)
+            $result = mysqli_query($con,$find);
+            if(mysqli_num_rows($result)>0){
+                while($row = mysqli_fetch_assoc($result)){
+                    echo "<table style='position:fixed;top:600px;left:50px;'>
+                    <tr><th>ID</th><th>Name</th><th>Email</th></tr>";
+                    while($row = mysqli_fetch_assoc($result)){
+                        echo "<tr><td>".$row['E_ID']."</td><td>".$row['E_Name']."</td><td>".$row['Email']."</td></tr>";
+                    }
+                    echo"</table";
+                }
+            }else{
+                echo"<html>
+            <script> 
+            alert('0 Rows : No such Employee');
+            </script>
+                </body>
+                </html>";
+            }
+           
     }
 
 
