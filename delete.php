@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title> Add Department</title>
+    <title> Delete Record</title>
     <style>
     .button {
     background-color: #e7e7e7; color: black
@@ -18,7 +18,7 @@
     }
 </style>
 </head>
-<body style='background-color:burlywood;'>
+<body style='background-color:powderblue;'>
 <div class='container'>
     <div class='header' style='font-size:35px'>
         <h1>
@@ -26,9 +26,9 @@
         </h1>
                     <!-- Navigation for going back-->
     <nav>
-    <table border="8px" align="right" style="width:8%;position:fixed;top:80px;right:0px;" >
+    <table border="8px" align="right" style="width:6%;position:fixed;top:80px;right:0px;" >
     <tr>
-    <td align="right" bgcolor="greenyellow"><a href="admin_index.php" <b>Go Back</b></a></td>
+    <td align="right" bgcolor="aqua"><a href="admin_index.php"style='text-decoration:none;font-size:20px' <b>Go Back</b></a></td>
     </tr>
     </nav>
     </div>
@@ -38,7 +38,7 @@
         <div>
         <p style='font-size:30px'>
             <label  style='color:blue;'>&nbsp;Employee ID :</label>  
-            <input style='font-size:40px;height:30px;'type = 'text' name='delete_id' required>
+            <input style='font-size:20px;height:33px;'type = 'text' name='delete_id' required>
             <div align='center'>
             <button style='height:40px;width:fit-content;blue;' type='submit' name='delete'>DELETE</button>
             </div>
@@ -47,4 +47,4 @@
     </form>
 </div>
 </body>
-</html>and
+</html>

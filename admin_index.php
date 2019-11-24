@@ -33,7 +33,7 @@
 </nav>
 <!-- ARTICLE ELEMENT-->
 <article class="article">
-<table id="table" align="center" border="10px" style="width:200px;height:500px;border-collapse:collapse" bgcolor="silver">
+<table id="table" align="center" border="10px" style="width:40%;height:600px;border-collapse:collapse" bgcolor="silver">
 <tr>
 <td align="center"><a href="add_dept.php" style="text-decoration:none;">Add Department</a> </td><!--Add department URL -->
 </tr>
@@ -47,8 +47,8 @@
 <td align="center">
     <!--<img src="arrow.jpg" style="width:20px;height:20px;position:fixed;top:546px;left:70"/></a>-->
 <font color="0000ff">Modify record</font><br/>
-<a href="Update.php"><input type="radio" value="update">Update</a>
-<a href="Delete.php"><input type="radio" value="delete">Delete</a>
+<a href="update.php"><input type="radio" value="update">Update</a>
+<a href="delete.php"><input type="radio" value="delete">Delete</a>
 </td>
 </tr>
 </table>

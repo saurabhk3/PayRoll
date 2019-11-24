@@ -35,11 +35,15 @@
         }else{
             $flg = 1;
             array_push($errors,"Username or Password is incorrect");
-        }
-        
-        
-
+        } 
     }
+
+    ////////////////////////GUEST LOGIN//////////////////////////
+
+    if(isset($_POST['guest'])){
+        header("location:admin_index.php");
+    }
+
 
      /////////////////////////////////////////////////////Adding a new department
     ///////////////////add_dept.php/////////////////////////////////////////////////////
@@ -95,7 +99,7 @@
                 echo"An employee with same ID exists";
             }else{
                 $q_emp ="INSERT INTO EMPLOYEE (E_ID,E_Name,Email,DoB,Age,SEX,Bank_Acct,DoJ,D_ID)
-                                        VALUES('$e_id',$e_name','$e_email',$e_dob','$e_age','$e_sex',$e_act',$e_doj','$e_did')";
+                                        VALUES('$e_id','$e_name','$e_email','$e_dob','$e_age','$e_sex','$e_act','$e_doj','$e_did')";
                 if(mysqli_query($con,$q_emp)){
                     echo"Employee record inserted";
                 }else{
@@ -103,6 +107,25 @@
                 }
             }
         }
+    }
+
+    /////////////////////////////DELETE///////////////////////////////
+
+    if(isset($_POST['delete'])){  // still have to again check when PAyroll and  leaves table is maintained
+        $delete_id = mysqli_real_escape_string($con,$_POST['delete_id']);
+        
+        $query_id = "SELECT * FROM EMPLOYMENT WHERE E_ID='$delete_id' LIMIT 1";
+        if(mysqli_query($con,$query_id)){
+            $del = "DELETE FROM EMPLOYEE WHERE E_ID='$delete_id'";
+            if(mysqli_query($con,$del)){
+                echo"succesfully deleted";
+            }else{
+                echo"failed!" .$con->error;
+            } 
+        }else{
+            echo"employee does not exists";
+        }
+
     }
 
 

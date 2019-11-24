@@ -16,54 +16,125 @@
     margin: 4px 2px;
     cursor: pointer;
     }
+    <style> 
+input[type=text]{
+  width: 100px;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 3px solid #ccc;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  outline: none;
+}
+input[type=date]{
+  width: 20%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 3px solid #ccc;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  outline: none;
+}
+input[type=email]{
+  width: 20%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 3px solid #ccc;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  outline: none;
+}
+input[type=number]{
+  width: 20%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 3px solid #ccc;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  outline: none;
+}
+
+input[type=text]:focus {
+  border: 3px solid #555;
+}
+input[type=email]:focus {
+  border: 3px solid #555;
+}
+input[type=number]:focus {
+  border: 3px solid #555;
+}
+input[type=date]:focus {
+  border: 3px solid #555;
+}
 </style>
 </head>
-<body style='background-color:burlywood;'>
+<body style='background-color:powderblue;'>
 <div class='container'>
     <div class='header' style='font-size:35px'>
         <h1>
             <p style='text-align:center'> ADD NEW EMPLOYEE</p>
         </h1> 
+                        <!-- Navigation for going back-->
+        <nav>
+            <table border="8px" align="right" style="width:8%;position:fixed;top:80px;right:0px;" >
+            <tr>
+            <td align="right" bgcolor="aqua"><a href="admin_index.php"style='text-decoration:none' <b>Go Back</b></a></td>
+            </tr>
+        </nav>
+            </div>
     </div>
     <form action='add_emp.php' method = 'post' >
-        <div>
+        <div align='center'>
         <p style='font-size:30px'>
-            <label  style='color:blue;'>&nbsp;Employee ID :</label>  
-            <input style='font-size:30px;height:30px;' type = 'text' name='e_id' placeholder='  EMP01' required><br>
+            <label  style='color:#555;'>&nbsp;Employee ID :</label> 
+            <br> 
+            <input  style='font-size:20px;height:33px;'type = 'text' name='e_id' placeholder='  EMP01' required>
             <br>
-            <label style="color:blue;">&nbsp;Employee Name :</label>            
-            <input style='font-size:30px;height:30px;'type = 'text' name='e_name' placeholder=' Mr.X' required><br>
+            <label style='color:#555;'>&nbsp;Employee Name :</label>      
+            <br>      
+            <input style='font-size:20px;height:33px;'type = 'text' name='e_name' placeholder=' Mr.X' required>
             <br>
-            <label  style='color:blue;'>&nbsp;Email ID :</label>  
-            <input style='font-size:30px;height:30px;'type = 'email' name='e_email' placeholder='   abc@xyz.com' required><br>
+            <label  style='color:#555;'>&nbsp;Email ID :</label>  
             <br>
-            <label style="color:blue;">&nbsp;Date Of Birth :</label>            
-            <input style='font-size:30px;height:30px;'type = 'date' name='e_dob' required><br>
+            <input style='font-size:20px;height:33px;'type = 'email' name='e_email' placeholder='   abc@xyz.com' required>
             <br>
-            <label  style='color:blue;'>&nbsp;Age :</label>  
-            <input style='font-size:30px;height:30px;'type = 'number' name='e_age' placeholder=' 25' required><br>
+            <label style='color:#555;'>&nbsp;Date Of Birth :</label>    
+            <br>        
+            <input style='font-size:20px;height:33px;'type = 'date' name='e_dob' required>
             <br>
-            <label style="color:blue;">&nbsp;Sex :</label>            
-            <input style='font-size:30px;height:30px;'type = 'text' name='e_sex' list='sex' required><br>
+            <label  style='color:#555;'>&nbsp;Age :</label>  
+            <br>
+            <input style='font-size:20px;height:33px;'type = 'number' name='e_age' placeholder=' 25' required>
+            <br>
+            <label style='color:#555;'>&nbsp;Sex :</label>            
+            <br>
+            <input style='font-size:20px;height:33px;'type = 'text' name='e_sex' list='sex' required>
             <datalist id='sex'>
-                <option value="MALE">
-                <option value="FEMALE">
-                <option value="OTHERS">
+                <option value="M">
+                <option value="F">
+                <option value="O">
         </datalist>
             <br>
-            <label  style='color:blue;'>&nbsp;Bank Account :</label>  
-            <input style='font-size:30px;height:30px;'type = 'number' name='e_act'placeholder='00000123456789' required><br>
+            <label  style='color:#555;'>&nbsp;Bank Account :</label>  
             <br>
-            <label style="color:blue;">&nbsp;Date Of Joining :</label>            
-            <input style='font-size:30px;height:30px;'type = 'date' name='e_doj' required><br>
+            <input style='font-size:20px;height:33px;'type = 'number' name='e_act'placeholder='00000123456789' required>
             <br>
-            <label  style='color:blue;'>&nbsp;Department ID :</label>  
-            <input style='font-size:30px;height:30px;'type = 'text' name='e_did' placeholder='  CSE03' required><br>
+            <label style='color:#555;'>&nbsp;Date Of Joining :</label>   
+            <br>         
+            <input style='font-size:20px;height:33px;'type = 'date' name='e_doj'  required>
+            <br>
+            <label style='color:#555;'>&nbsp;Department ID :</label>  
+            <br>
+            <input style='font-size:20px;height:33px;'type = 'text' name='e_did' placeholder='  CSE03' required>
             <br>
         </p>
         </div>
         <br>
-        <div >
+        <div align='center'>
         <button class="button" type='submit'name='emp'>&nbsp;ADD&nbsp;</button>
         <button class="button" type='reset' name='reset_emp'>&nbsp;RESET&nbsp;</button>
         </p>
