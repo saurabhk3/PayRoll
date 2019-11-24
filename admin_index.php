@@ -16,25 +16,33 @@
 <nav>
 <table border="8px" align="right" style="width:100%;" >
 <tr>
-<td align="center" bgcolor="darkkhaki"><a href="Home.php" target="_blank"><b>Home</b></a></td>
-<td align="center" bgcolor="darkseagreen"><a href="info.txt" target="_blank"><b>About us</b></a></td>
-<td align="center" bgcolor="greenyellow"><a href="log_in.php" target="_blank"><b>Log out</b></a></td>
+<td align="center" bgcolor="darkkhaki"><a href="Home.php" target="_blank" style="text-decoration:none"><b>Home</b></a></td>
+<td align="center" bgcolor="darkseagreen"><a href="info.txt" target="_blank" style="text-decoration:none"><b>About us</b></a></td>
+<td align="center" bgcolor="greenyellow"><a href="login.php" target="_blank" style="text-decoration:none"><b>Log out</b></a></td>
 </tr>
 </nav>
 <!-- ARTICLE ELEMENT-->
 <article class="article">
-<table id="table" align="center" border="10px" style="width:200px;height:500px;border-collapse:collapse" bgcolor="silver">
+<table id="table" align="center" border="10px" style="width:40%;height:500px;border-collapse:collapse" bgcolor="silver">
 <tr>
-<td align="center"><a href="add_dept.php">Add Department</a> </td><!--Add department URL -->
+<td align="center"><a href="add_dept.php" style="text-decoration:none"><span style="font-size:30px">Add Department</span></a> </td><!--Add department URL -->
 </tr>
 <tr>
-<td align="center"><a href="add_emp.php">Add Employee </a></td><!-- Add employee URL-->
+<td align="center"><a href="add_emp.php" style="text-decoration:none;"><span style="font-size:30px">Add Employee </span></a></td><!-- Add employee URL-->
 </tr>
 <tr>
-<td align="center"><a href="view.php">Show Employee details</a></td><!-- -->
+<td align="center"><a href="view.php" style="text-decoration:none;"><span style="font-size:30px">Show Employee details</span></a></td><!-- -->
 </tr>
 <tr>
-<td align="center"><a href="modify.php">Modify Record</a></td><!-- -->
+<td align="center">
+    <!--<img src="arrow.jpg" style="width:20px;height:20px;position:fixed;top:546px;left:70"/></a>-->
+<font color="0000ff"><span style="font-size:30px">Modify record</span></font><br/>
+<a href="update.php" style="text-decoration:none"><input type="radio" name="mod" id="mo" value="update" onclick="document.getElementById('mo').checked=false"><span style="font-size:20px">Update</span></a>
+<a href="delete.php" style="text-decoration:none"><input type="radio" name="mod" id="mod" value="delete" onclick="document.getElementById('mod').checked=false"><span style="font-size:20px">Delete</span></a>
+</td>
+</tr>
+<tr>
+<td align="center"><a href="leave.php" style="text-decoration:none;"><span style="font-size:30px">Leave Entry</span></a></td><!-- -->
 </tr>
 </table>
 </article>
