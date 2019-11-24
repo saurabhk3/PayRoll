@@ -19,7 +19,8 @@
     <style> 
 input[type=text]{
   width: 100px;
-  padding: 12px 20px;
+  height: 100px;
+  padding: 12px 15px;
   margin: 8px 0;
   box-sizing: border-box;
   border: 3px solid #ccc;
@@ -88,14 +89,14 @@ input[type=date]:focus {
             </div>
     </div>
     <form action='add_emp.php' method = 'post' >
-        <div align='center'>
-        <p style='font-size:30px'>
-            <label  style='color:#555;'>&nbsp;Employee ID :</label> 
-            <br> 
-            <input  style='font-size:20px;height:33px;'type = 'text' name='e_id' placeholder='  EMP01' required>
+        <div align='left' style="position:relative;left:40px">
+        <p style='font-size:25px'>
+            <label  style='color:#555;'>&nbsp;Employee ID &nbsp;&nbsp;&nbsp;&nbsp;:</label> 
             <br>
-            <label style='color:#555;'>&nbsp;Employee Name :</label>      
-            <br>      
+            <input style='font-size:20px;height:33px;'type = 'text'  name='e_id' placeholder='  EMP01' required>
+            <br>
+            <label style='color:#555;'>&nbsp;Employee Name &nbsp;:</label>      
+            <br> 
             <input style='font-size:20px;height:33px;'type = 'text' name='e_name' placeholder=' Mr.X' required>
             <br>
             <label  style='color:#555;'>&nbsp;Email ID :</label>  
@@ -103,7 +104,7 @@ input[type=date]:focus {
             <input style='font-size:20px;height:33px;'type = 'email' name='e_email' placeholder='   abc@xyz.com' required>
             <br>
             <label style='color:#555;'>&nbsp;Date Of Birth :</label>    
-            <br>        
+            <br>      
             <input style='font-size:20px;height:33px;'type = 'date' name='e_dob' required>
             <br>
             <label  style='color:#555;'>&nbsp;Age :</label>  
@@ -124,13 +125,32 @@ input[type=date]:focus {
             <input style='font-size:20px;height:33px;'type = 'number' name='e_act'placeholder='00000123456789' required>
             <br>
             <label style='color:#555;'>&nbsp;Date Of Joining :</label>   
-            <br>         
+            <br>       
             <input style='font-size:20px;height:33px;'type = 'date' name='e_doj'  required>
             <br>
             <label style='color:#555;'>&nbsp;Department ID :</label>  
             <br>
             <input style='font-size:20px;height:33px;'type = 'text' name='e_did' placeholder='  CSE03' required>
             <br>
+            <label  style='color:#555;'>&nbsp;PayRoll ID :</label>  
+            <br>
+            <input style='font-size:20px;height:33px;'type = 'text' name='e_pid'placeholder='PAY00' required>
+            <br>
+            <label style='color:#555;'>&nbsp;Basic Salary :</label>   
+            <br>      
+            <input style='font-size:20px;height:33px;'type = 'number' name='e_basic' placeholder='000' required>
+            <br>
+            <label style='color:#555;'>&nbsp;Allowance Amount:</label>  
+            <br>
+            <input style='font-size:20px;height:33px;'type = 'number' name='e_al' placeholder= '000' required>
+            <br>
+            <label style='color:#555;'>&nbsp;Deduction Amount:</label>  
+            <br>
+            <input style='font-size:20px;height:33px;'type = 'number' name='e_ded' placeholder='000' required>
+            <br>
+            <label style='color:#555;'>&nbsp;Tax Amount:</label>  
+            <br>
+            <input style='font-size:20px;height:33px;'type = 'number' name='e_tax' placeholder='1500' required>
         </p>
         </div>
         <br>

@@ -102,8 +102,39 @@
                                         VALUES('$e_id','$e_name','$e_email','$e_dob','$e_age','$e_sex','$e_act','$e_doj','$e_did')";
                 if(mysqli_query($con,$q_emp)){
                     echo"Employee record inserted";
+                
+                // now we have to insert corresponding records in LEAVE and PAYROLL TABLE
+                // initialiasing Leave(E_ID,FMLA,Maternity,Person)
+                $start_val = 0;
+                $init = "INSERT INTO LEAVES (E_ID,FMLA,Maternity,Person) VALUES 
+                            ('$e_id','$start_val','$start_val','$start_val')";
+                if(mysqli_query($con,$init)){
+                    echo"Inserted LEAVE";
                 }else{
-                    echo"Employee failed" .$con->error;
+                    echo"FAiled LEave";
+                }
+                // adding data to PAYROLL TABLE(P_ID,E_ID,Gross_Salary,Basic_Salary,ALLOWANCE,DEDUCTION,TAX,NET_SALARY)
+                
+                $p_id = mysqli_real_escape_string($con,$_POST['e_pid']);
+                $e_basic = mysqli_real_escape_string($con,$_POST['e_basic']);
+                $e_al = mysqli_real_escape_string($con,$_POST['e_al']);
+                $e_ded = mysqli_real_escape_string($con,$_POST['e_ded']);
+                $p_id = mysqli_real_escape_string($con,$_POST['e_pid']);
+                $e_tax = mysqli_real_escape_string($con,$_POST['e_tax']);
+
+                $gross = $e_basic + $e_al ;
+                $net = $gross - $e_ded - $e_tax;
+
+                $pay_query = "INSERT INTO PAYROLL (P_ID,E_ID,Gross_Salary,Basic_Salary,ALLOWANCE,DEDUCTION,TAX,NET_SALARY)
+                                VALUES('$p_id','$e_id','$gross','$e_basic','$e_al','$e_ded','$e_tax','$net')";
+                if(mysqli_query($con,$pay_query)){
+                    echo"Successfull PAyroll";
+                }else{
+                    echo"Failed PAyroll";
+                }
+
+            }else{
+                echo"Employee failed" .$con->error;
                 }
             }
         }
