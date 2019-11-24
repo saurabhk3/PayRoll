@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title> Add Department</title>
+    <title> Update</title>
     <style>
     .button {
     background-color: #e7e7e7; color: black
@@ -22,7 +22,7 @@
 <div class='container'>
     <div class='header' style='font-size:35px'>
         <h1>
-            <p style='text-align:center'> ADD NEW DEPARTMENT</p>
+            <p style='text-align:center'> UPDATE DETAILS OF EMPLOYEE</p>
         </h1>
                     <!-- Navigation for going back-->
     <nav>
@@ -34,21 +34,17 @@
     </div>
   
 
-    <form action='add_dept.php' method = 'post' align='center'>
+    <form action='update.php' method = 'post' align='center'>
         <div>
         <p style='font-size:30px'>
-            <label  style='color:blue;'>&nbsp;Department Name :</label>  
-            <input style='font-size:40px;height:30px;width:500px;'type = 'text' name='dept_name' required><br>
-            <br>
-            <label style="color:blue;">&nbsp;Department ID :</label>            
-            <input style='font-size:40px;height:30px;'type = 'text' name='dept_id' placeholder='CSE01' required><br>
+            <label  style='color:blue;'>&nbsp;Employee ID :</label>  
+            <input style='font-size:40px;height:30px;'type = 'text' name='update_id' required>
+            <div align='center'>
+            <button style='height:40px;width:fit-content;blue;' type='submit' name='update'>UPDATE</button>
+            
+            </div>
         </p>
         </div>
-        
-        <br>
-        <div >
-        <button class="button" name='dept'>&nbsp;ADD&nbsp;</button>
-        </p>
     </form>
 </div>
 </body>

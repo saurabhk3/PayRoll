@@ -1,4 +1,6 @@
-<?php include('server.php')?>
+<?php include('server.php')
+    // ADD CODE FOR DISPLAYING MSG IF LOGIN IS INVALID
+?>
 
 <!DOCTYPE html>
 <html>
@@ -18,16 +20,17 @@
             <label style='color:green;'>&nbsp;Username :</label>  
             <br>
             <input type = 'text' name='username' required>
-        </div>
-        <div>
+            <br>
             <label style="color:green;">&nbsp;Password :</label>
             <br>            
             <input type = 'password' name='password' required>
+
         </div>
         <br>
         <div>
             <button style='color:blue;' type='submit' name='login'>Login</button>
     </form>
+    
 </div>
 </body>
 </html>

@@ -1,5 +1,15 @@
-<!--UPDATE IDEAS-->
-<!-- 1.CUSTOMIZE MOUSE CURSOR-->
+<?php
+ include ('server.php');
+    if(!$_SESSION['username']){
+        $_SESSION['msg'] = "You must login to view this page";
+        header("location:login.php");
+    }
+    // if($_GET['logout']){
+    //     session_destroy();
+    //     unset($_SESSION['username']);
+    //     header("location:login.php");
+    // }
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,9 +26,9 @@
 <nav>
 <table border="8px" align="right" style="width:100%;" >
 <tr>
-<td align="center" bgcolor="darkkhaki"><a href="Home.php" target="_blank"><b>Home</b></a></td>
-<td align="center" bgcolor="darkseagreen"><a href="info.txt" target="_blank"><b>About us</b></a></td>
-<td align="center" bgcolor="greenyellow"><a href="log_in.php" target="_blank"><b>Log out</b></a></td>
+<td align="center" bgcolor="darkkhaki"><a href="Home.php" ><b>Home</b></a></td>
+<td align="center" bgcolor="darkseagreen"><a href="info.txt" ><b>About us</b></a></td>
+<td align="center" bgcolor="greenyellow"><a href="login.php" ><b>Log out</b></a></td>
 </tr>
 </nav>
 <!-- ARTICLE ELEMENT-->
@@ -46,21 +56,4 @@
 </body>
 </html>
 <?php
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ?>

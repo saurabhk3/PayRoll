@@ -25,7 +25,7 @@
             <p style='text-align:center'> ADD NEW EMPLOYEE</p>
         </h1> 
     </div>
-    <form action='add_dept.php' method = 'post' >
+    <form action='add_emp.php' method = 'post' >
         <div>
         <p style='font-size:30px'>
             <label  style='color:blue;'>&nbsp;Employee ID :</label>  
@@ -44,7 +44,12 @@
             <input style='font-size:30px;height:30px;'type = 'number' name='e_age' placeholder=' 25' required><br>
             <br>
             <label style="color:blue;">&nbsp;Sex :</label>            
-            <input style='font-size:30px;height:30px;'type = 'text' name='e_sex' placeholder='M/F' required><br>
+            <input style='font-size:30px;height:30px;'type = 'text' name='e_sex' list='sex' required><br>
+            <datalist id='sex'>
+                <option value="MALE">
+                <option value="FEMALE">
+                <option value="OTHERS">
+        </datalist>
             <br>
             <label  style='color:blue;'>&nbsp;Bank Account :</label>  
             <input style='font-size:30px;height:30px;'type = 'number' name='e_act'placeholder='00000123456789' required><br>
@@ -59,7 +64,8 @@
         </div>
         <br>
         <div >
-        <button class="button" type='submit'>&nbsp;ADD&nbsp;</button>
+        <button class="button" type='submit'name='emp'>&nbsp;ADD&nbsp;</button>
+        <button class="button" type='reset' name='reset_emp'>&nbsp;RESET&nbsp;</button>
         </p>
     </form>
 </div>
