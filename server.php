@@ -33,12 +33,8 @@
             header('location:admin_index.php');
            
         }else{   // displays an alert 
-            echo"<html>
-            <script> 
-            alert('Input Required!');
-            </script>
-                </body>
-                </html>";
+            echo"<script>alert('Input Required!');</script>";
+            
         } 
     }
 
@@ -60,18 +56,14 @@
         $results_dep = mysqli_query($con,$check_dup_dep);
         $result_dep = mysqli_fetch_assoc($results_dep);
         if($result_dep){
-            echo"<html>
-            <script> 
-            alert('An entry with same ID or name already exists');
-            </script>
-                </body>
-                </html>";
+            echo"<script>alert('An entry with same ID or name exists');</script>";
+            
         }else{
             $q_dep = "INSERT INTO DEPARTMENT (D_ID,D_NAME) VALUES('$new_dept_id','$new_dept_name')";
             if(mysqli_query($con,$q_dep)){
-                echo"Yaaay!";
+                echo"<script>alert('Added Successfully');</script>";
             }else{
-                echo"Ooops! ".$con->error;
+                echo"<script>alert('Failed!');</script>";
             }
         }
     }
@@ -100,47 +92,46 @@
         $results_dep_emp = mysqli_query($con,$check_dup_dep_emp);
         $result_dep_emp = mysqli_fetch_assoc($results_dep_emp);
         if(!$result_dep_emp){
-            echo"<html>
-            <script> 
-            alert('Department doesn't exists');
-            </script>
-                </body>
-                </html>";
+            echo"<script>alert('Department Does not exists');</script>";
+            
         }else{
             if($result_emp ){
-                echo"<html>
-            <script> 
-            alert('An employee with same ID exists!');
-            </script>
-                </body>
-                </html>";
+                echo"<script>alert('An employee with same ID exists');</script>";
+
             }else{
                 $q_emp ="INSERT INTO EMPLOYEE (E_ID,E_Name,Email,DoB,Age,SEX,Bank_Acct,DoJ,D_ID)
                                         VALUES('$e_id','$e_name','$e_email','$e_dob','$e_age','$e_sex','$e_act','$e_doj','$e_did')";
                 if(mysqli_query($con,$q_emp)){
+                   
                 
-                    // adding data to PAYROLL TABLE(P_ID,E_ID,Gross_Salary,Basic_Salary,ALLOWANCE,DEDUCTION,TAX,NET_SALARY)
+                
+                // adding data to PAYROLL TABLE(P_ID,E_ID,Gross_Salary,Basic_Salary,ALLOWANCE,DEDUCTION,TAX,NET_SALARY)
+                
+                $p_id = mysqli_real_escape_string($con,$_POST['e_pid']);
+                $e_basic = mysqli_real_escape_string($con,$_POST['e_basic']);
+                $e_al = mysqli_real_escape_string($con,$_POST['e_al']);
+                $e_ded = mysqli_real_escape_string($con,$_POST['e_ded']);
+                $p_id = mysqli_real_escape_string($con,$_POST['e_pid']);
+                $e_tax = mysqli_real_escape_string($con,$_POST['e_tax']);
+
+                $gross = $e_basic + $e_al ;
+                $net = $gross - $e_ded - $e_tax;
+
+                $pay_query = "INSERT INTO PAYROLL (P_ID,E_ID,Gross_Salary,Basic_Salary,ALLOWANCE,DEDUCTION,TAX,NET_SALARY)
+                                VALUES('$p_id','$e_id','$gross','$e_basic','$e_al','$e_ded','$e_tax','$net')";
+                if(mysqli_query($con,$pay_query)){
                     
-                    $p_id = mysqli_real_escape_string($con,$_POST['e_pid']);
-                    $e_basic = mysqli_real_escape_string($con,$_POST['e_basic']);
-                    $e_al = mysqli_real_escape_string($con,$_POST['e_al']);
-                    $e_ded = mysqli_real_escape_string($con,$_POST['e_ded']);
-                    $p_id = mysqli_real_escape_string($con,$_POST['e_pid']);
-                    $e_tax = mysqli_real_escape_string($con,$_POST['e_tax']);
-
-                    $gross = $e_basic + $e_al ;
-                    $net = $gross - $e_ded - $e_tax;
-
-                    $pay_query = "INSERT INTO PAYROLL (P_ID,E_ID,Gross_Salary,Basic_Salary,ALLOWANCE,DEDUCTION,TAX,NET_SALARY)
-                                    VALUES('$p_id','$e_id','$gross','$e_basic','$e_al','$e_ded','$e_tax','$net')";
-                    if(mysqli_query($con,$pay_query)){
+                }else{
+                    echo"<script>alert('PayRoll Failed');</script>";
+                }
+                // now we have to insert corresponding records in LEAVE and PAYROLL TABLE
+                // initialiasing Leave(E_ID,FMLA,Maternity,Person)
+                $val = 0;
+                $q = "INSERT INTO LEAVE_RECORD (E_ID,FMLA,Maternity,Personal) VALUES('$e_id',$val,$val,$val)";
+                    if(mysqli_query($con,$q)){
+                        echo"<script>alert('Successfullly added');</script>";
                     }else{
-                        echo"<html>
-                            <script> 
-                            alert('Failed Payroll entry');
-                            </script>
-                                </body>
-                                </html>";
+                        echo"<script>alert('Leave Failed');</script>";
                     }
                             // now we have to insert corresponding records in LEAVE and PAYROLL TABLE
                             // initialiasing Leave(E_ID,FMLA,Maternity,Person)
@@ -167,12 +158,7 @@
                                 }
 
             }else{
-                echo"<html>
-            <script> 
-            alert('Employee Failed');
-            </script>
-                </body>
-                </html>";
+                echo"<script>alert('Leave Failed');</script>" ;
                 }
             }
         }
@@ -180,6 +166,7 @@
 
     /////////////////////////////DELETE///////////////////////////////
 
+    
     if(isset($_POST['delete'])){  // still have to again check when PAyroll and  leaves table is maintained
         $delete_id = mysqli_real_escape_string($con,$_POST['delete_id']);
         
@@ -191,33 +178,17 @@
             if(mysqli_query($con,$del_payroll)){
                 if(mysqli_query($con,$del_leave)){  
                     if(mysqli_query($con,$del)){
-                        echo"<html>
-                            <script> 
-                            alert('Successfully Deleted!');
-                            </script>
-                            </body>
-                            </html>";
+                        echo"<script>alert('Successfully Deleted');</script>";
                 
-
             }else{
-                echo"<html>
-            <script> 
-            alert('Can not delete!Failed');
-            </script>
-                </body>
-                </html>";
+                echo"<script>alert('Can not Delete!');</script>";
             } 
         }
         else{
-            echo"<html>
-            <script> 
-            alert('Employee does not exists);
-            </script>
-                </body>
-                </html>";
+            echo"<script>alert('Employee does not exist!');</script>";
         }
-
             }
+        }
 
         }
     /////////////////////////////////SEARCH (view.php)////////////////////////////////
@@ -225,49 +196,41 @@
     if(isset($_POST['search'])){
         $s_id = mysqli_real_escape_string($con,$_POST['search_id']);
 
-        if(empty($s_id)){
-            echo"<html>
-            <script> 
-            alert('Input Required!');
-            </script>
-                </body>
-                </html>";
+        if(empty($s_id) ){
+            echo"<script>alert('Input Required!');</script>";
+            
         }else if(!empty($s_id)){
-            $find = "SELECT * FROM EMPLOYEE,PAYROLL,LEAVE_RECORD WHERE EMPLOYEE.E_ID='$s_id' 
-            AND EMPLOYEE.E_ID=PAYROLL.E_ID ";  
+            $find = "SELECT * FROM EMPLOYEE,PAYROLL,LEAVE_RECORD WHERE 
+            EMPLOYEE.E_ID=PAYROLL.E_ID AND EMPLOYEE.E_ID=LEAVE_RECORD.E_ID AND EMPLOYEE.E_ID='$s_id'";  
             $result = mysqli_query($con,$find);
             if(mysqli_num_rows($result)>0){
-                echo "<table style='position:fixed;bottom:400px;left:10px;font-size:30px;'>
-                <tr><th>E_ID</th><th>Name</th><th>Email</th><th>DoB</th><th>SEX</th><th>Payroll_Id</th>
-                <th>GrossSalary</th><th>Basic Salary</th><th>Allowance</th><th>Deduction</th><th>Tax</th><th>NetSalary</th>
-                </tr>";
+                echo "<table style='position:fixed;bottom:500px;left:50px;'>
+                <tr><th>E_ID</th><th>E_Name</th><th>Email</th><th>DoB</th><th>Sex</th><th>Bank_acct</th>
+                <th>D_ID</th><th>P_ID</th><th>Gross_Salary</th><th>Basic_Salary</th><th>Allowance</th><th>Deduction</th>
+                <th>Tax</th><th>Net_Salary</th><th>FMLA </th><th>Maternity Leave</th><th>Personal Leave</th></tr>";
                 while($row = mysqli_fetch_assoc($result)){
-                    echo "<tr><td>".$row['E_ID']." "."</td><td>".$row['E_Name']."</td><td>".$row['Email']."</td>
-                    <td>".$row['DoB']."</td><td>".$row['SEX']."</td><td>".$row['P_ID']."</td>
-                    <td>".$row['Gross_Salary']."</td><td>".$row['Basic_Salary']."</td><td>".$row['ALLOWANCE']."</td>
-                    <td>".$row['DEDUCTION']."</td><td>".$row['TAX']."</td><td>".$row['NET_SALARY']."</td>
-                    </tr>";
+                    echo "<tr><td>"."  ".$row['E_ID']."  "."</td><td>"."  ".$row['E_Name']."  "."</td><td>"."  ".$row['Email']."  "."</td>
+                    <td>".$row['DoB']."</td><td>".$row['SEX']."</td><td>".$row['Bank_Acct']."</td>
+                    <td>"."  ".$row['D_ID']."  "."</td><td>"."  ".$row['P_ID']."  "."</td><td>"."  ".$row['Gross_Salary']."  "."</td>
+                    <td>"."  ".$row['Basic_Salary']."  "."</td><td>"."  ".$row['ALLOWANCE']."  "."</td><td>"."  ".$row['DEDUCTION']."  "."</td>
+                    <td>"."  ".$row['TAX']."  "."</td><td>"."  ".$row['NET_SALARY']."  "."</td><td>"."  ".$row['FMLA']."  "."</td>
+                    <td>"."  ".$row['Maternity']."  "."</td><td>"."  ".$row['Personal']."  "."</td></tr>";
                 }
                 echo"</table";
             }else{
-                echo"<html>
-            <script> 
-            alert('0 Rows : No such Employee');
-            </script>
-                </body>
-                </html>";
+                echo"<script>alert('No such employee exists!');</script>";
+
             }
         }
           
         
-           
     }
 
 
 
-    ///////////////////////UPDATE(update.php)//////////////////////////////
+     ///////////////////////UPDATE(update.php)//////////////////////////////
     
-    if(isset($_POST['update_payroll'])){
+     if(isset($_POST['update_payroll'])){
         $u_id = mysqli_real_escape_string($con,$_POST['update_id']);
 
         if(empty($u_id) ){
@@ -319,6 +282,35 @@
             ".$con->error;
         }
         
+
+    }
+
+    //////////////////LEAVE/////////////////////////////////
+
+    if(isset($_POST['add_leave'])){
+
+        $l_eid = mysqli_real_escape_string($con,$_POST['l_eid']);
+        $fmla = mysqli_real_escape_string($con,$_POST['fmla']);
+        $maternity = mysqli_real_escape_string($con,$_POST['maternity']);
+        $personal = mysqli_real_escape_string($con,$_POST['personal']);
+
+        //check first whether id is valid or not..i.e employee exists or not
+        $q_e = "SELECT * FROM LEAVE WHERE E_ID='$l_eid'";
+        $q_r = mysqli_query($con,$q_e);
+        if(mysqli_num_rows($q_r)){
+            $q_rslt = mysqli_fetch_assoc($q_r);
+            $new_fmla = $fmla + $q_rslt['FMLA'];
+            $new_mat = $maternity + $q_rslt['Maternity'];
+            $new_per = $personal + $q_rslt['Personal'];
+
+            $update = "UPDATE LEAVE_RECORD SET FMLA='$new_fmla', Maternity='$new_mat',Personal='$new_per'";
+            if(mysqli_query($con,$update)){
+                echo"<script>alert('Successfully Updated Leave Record');</script>";
+            }else{
+                echo"<script>alert('Failed to Update Leave Record,Check emp id again');</script>";
+            }
+            header("location:admin_index.php");
+        }
 
     }
 
