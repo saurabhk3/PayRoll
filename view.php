@@ -41,9 +41,9 @@ input[type=text]:focus {
         <nav>
             <table border="8px" align="right" style="width:8%;position:fixed;top:80px;right:0px;" >
             <tr>
-            <td align="right" bgcolor="aqua"><a href="admin_index.php" style='text-decoration:none' <b>Go Back</b></a></td>
+            <td align="right" bgcolor="aqua"><a href="login.php" style='text-decoration:none' <b>Log out</b></a></td>
             </tr>
-        </nav>
+        </nav> 
     </div>
         <h2>
             <p style='text-align:center'> Search Employee </p>

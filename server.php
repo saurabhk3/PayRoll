@@ -258,4 +258,53 @@
     }
 
 
+
+    ///////////////////////UPDATE//////////////////////////////
+    // if(isset($_POST['update_payoll'])){
+    //     $up_id = mysqli_real_escape_string($con,$_POST['update_id']);
+    //     if(empty($up_id)){
+    //         header("location:update.php");
+    //     }
+    //     $query = "SELECT * FROM EMPLOYEE WHERE E_ID='$up_id'";
+    //     $up_result = mysqli_query($con,$query);
+    //     if(mysqli_num_rows($up_result)>0){
+    //         header('location:updatedata.php');
+    //     }else{
+    //         echo"<html>
+    //         <script> 
+    //         alert(' No such Employee exists');
+    //         </script>
+    //             </body>
+    //             </html>";
+    //             header("location:updatedata.php");
+    //     }
+    // }
+    if(isset($_POST['update_payroll'])){
+        $u_id = mysqli_real_escape_string($con,$_POST['update_id']);
+
+        if(empty($u_id) ){
+            echo"<html>
+            <script> 
+            alert('Input Required!');
+            </script>
+                </body>
+                </html>";
+        }else{
+            $u_find = "SELECT * FROM EMPLOYEE WHERE E_ID='$u_id'";  
+            $u_result = mysqli_query($con,$u_find);
+            if(mysqli_num_rows($u_result)>0){
+               header('location:updatedata.php');
+            }else{
+                echo"<html>
+            <script> 
+            alert(' No such Employee');
+            </script>
+                </body>
+                </html>";
+            }
+        }
+           
+    }
+
+
 ?>

@@ -46,7 +46,7 @@
 <tr>
 <td align="center">
     <!--<img src="arrow.jpg" style="width:20px;height:20px;position:fixed;top:546px;left:70"/></a>-->
-<font color="0000ff"><span style="font-size:30px">Modify record</span></font><br/>
+<font color="0000ff"><span style="font-size:30px">Modify PayRoll Record</span></font><br/>
 <a href="update.php" style="text-decoration:none"><input type="radio" name="mod" id="mo" value="update" onclick="document.getElementById('mo').checked=false"><span style="font-size:20px">Update</span></a>
 <a href="delete.php" style="text-decoration:none"><input type="radio" name="mod" id="mod" value="delete" onclick="document.getElementById('mod').checked=false"><span style="font-size:20px">Delete</span></a>
 </td>
