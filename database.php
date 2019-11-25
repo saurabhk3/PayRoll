@@ -9,7 +9,7 @@
     }else{
         echo"Successfully connected\n";
     }
-    $dept = "CREATE TABLE DEPARTMEMT(
+    $dept = "CREATE TABLE DEPARTMENT(
         D_ID VARCHAR(6) PRIMARY KEY, 
         D_NAME VARCHAR(30) NOT NULL)";
 

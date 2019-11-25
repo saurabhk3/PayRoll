@@ -40,7 +40,8 @@
             <label  style='color:blue;'>&nbsp;Employee ID :</label>  
             <input style='font-size:40px;height:30px;'type = 'text' name='update_id' required>
             <div align='center'>
-            <button style='height:40px;width:fit-content;blue;' type='submit' name='update'>UPDATE</button>
+            <div align='center'>
+        <button class="button" name="update_payroll">&nbsp;Update&nbsp;</button>
             
             </div>
         </p>
@@ -49,3 +50,6 @@
 </div>
 </body>
 </html>
+<?php
+        
+?>
