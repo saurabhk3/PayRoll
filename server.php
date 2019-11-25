@@ -233,13 +233,20 @@
                 </body>
                 </html>";
         }else if(!empty($s_id)){
-            $find = "SELECT * FROM EMPLOYEE WHERE E_ID='$s_id'";  // query so that it contains all info (PAYROLL,LEaVE_RECORD)
+            $find = "SELECT * FROM EMPLOYEE,PAYROLL,LEAVE_RECORD WHERE EMPLOYEE.E_ID='$s_id' 
+            AND EMPLOYEE.E_ID=PAYROLL.E_ID ";  
             $result = mysqli_query($con,$find);
             if(mysqli_num_rows($result)>0){
-                echo "<table style='position:fixed;top:600px;left:50px;'>
-                <tr><th>ID</th><th>Name</th><th>Email</th></tr>";
+                echo "<table style='position:fixed;bottom:400px;left:10px;font-size:30px;'>
+                <tr><th>E_ID</th><th>Name</th><th>Email</th><th>DoB</th><th>SEX</th><th>Payroll_Id</th>
+                <th>GrossSalary</th><th>Basic Salary</th><th>Allowance</th><th>Deduction</th><th>Tax</th><th>NetSalary</th>
+                </tr>";
                 while($row = mysqli_fetch_assoc($result)){
-                    echo "<tr><td>".$row['E_ID']."</td><td>".$row['E_Name']."</td><td>".$row['Email']."</td></tr>";
+                    echo "<tr><td>".$row['E_ID']." "."</td><td>".$row['E_Name']."</td><td>".$row['Email']."</td>
+                    <td>".$row['DoB']."</td><td>".$row['SEX']."</td><td>".$row['P_ID']."</td>
+                    <td>".$row['Gross_Salary']."</td><td>".$row['Basic_Salary']."</td><td>".$row['ALLOWANCE']."</td>
+                    <td>".$row['DEDUCTION']."</td><td>".$row['TAX']."</td><td>".$row['NET_SALARY']."</td>
+                    </tr>";
                 }
                 echo"</table";
             }else{
@@ -258,26 +265,8 @@
 
 
 
-    ///////////////////////UPDATE//////////////////////////////
-    // if(isset($_POST['update_payoll'])){
-    //     $up_id = mysqli_real_escape_string($con,$_POST['update_id']);
-    //     if(empty($up_id)){
-    //         header("location:update.php");
-    //     }
-    //     $query = "SELECT * FROM EMPLOYEE WHERE E_ID='$up_id'";
-    //     $up_result = mysqli_query($con,$query);
-    //     if(mysqli_num_rows($up_result)>0){
-    //         header('location:updatedata.php');
-    //     }else{
-    //         echo"<html>
-    //         <script> 
-    //         alert(' No such Employee exists');
-    //         </script>
-    //             </body>
-    //             </html>";
-    //             header("location:updatedata.php");
-    //     }
-    // }
+    ///////////////////////UPDATE(update.php)//////////////////////////////
+    
     if(isset($_POST['update_payroll'])){
         $u_id = mysqli_real_escape_string($con,$_POST['update_id']);
 
@@ -303,6 +292,34 @@
             }
         }
            
+    }
+    ///////////////////////////////UPDATE(updatedata.php)//////////////////////
+    if(isset($_POST['update_data'])){
+        $up_id = mysqli_real_escape_string($con,$_POST['up_eid']);
+        $pay = mysqli_real_escape_string($con,$_POST['up_pid']);
+        $basic = mysqli_real_escape_string($con,$_POST['up_basic']);
+        $allow = mysqli_real_escape_string($con,$_POST['up_al']);
+        $deduct = mysqli_real_escape_string($con,$_POST['up_ded']);
+        $tax = mysqli_real_escape_string($con,$_POST['up_tax']);
+
+        $u_gross = $basic + $allow;
+        $u_net = $u_gross - $deduct;
+
+        $update_q = "UPDATE PAYROLL SET P_ID = '$pay',Gross_Salary='$u_gross',Basic_Salary='$basic',
+                    ALLOWANCE='$allow',DEDUCTION='$deduct',TAX='$tax',NET_SALARY='$u_net' WHERE PAYROLL.E_ID='$up_id'";
+        if(mysqli_query($con,$update_q)){
+            echo"
+            <script> alert('Successfully updated');
+            </script>
+            ";
+        }else{
+            echo"
+            <script> alert('Update Failed');
+            </script>
+            ".$con->error;
+        }
+        
+
     }
 
 
