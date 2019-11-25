@@ -110,14 +110,7 @@ input[type=date]:focus {
             <br> 
             <input style='font-size:20px;height:33px;'type = 'text' name='up_eid' value="EMP01"  >
             <br>
-            <label  style='color:#555;'>&nbsp;Bank Account :</label>  
-            <br>
-            <input style='font-size:20px;height:33px;'type = 'number' name='up_act'placeholder='00000123456789' required> 
-            <br>
-            <label style='color:#555;'>&nbsp;Department ID :</label>  
-            <br>
-            <input style='font-size:20px;height:33px;'type = 'text' name='up_did' placeholder='  CSE03' required>
-            <br>
+            
             <label  style='color:#555;'>&nbsp;PayRoll ID :</label>  
             <br>
             <input style='font-size:20px;height:33px;'type = 'text' name='up_pid' placeholder='  PAY03' required>
