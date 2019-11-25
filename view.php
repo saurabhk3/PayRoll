@@ -53,9 +53,6 @@ input[type=text]:focus {
         <div align='center' >
                 <label style='color:green;'>Enter Employee ID</label>
                 <input style='font-size:25px;' type='text' name='search_id' placeholder=' EMP01' ><br>
-                <label style='color:red; align:center;'> OR</label><br>
-                <label style='color:green;'>Enter Name &nbsp;&nbsp;</label>
-                <input style='font-size:25px;' type='text' name='search_name' placeholder=' Mr.X' >
         </div>
         <br><br>
         <div align='center'>

@@ -118,47 +118,53 @@
                 $q_emp ="INSERT INTO EMPLOYEE (E_ID,E_Name,Email,DoB,Age,SEX,Bank_Acct,DoJ,D_ID)
                                         VALUES('$e_id','$e_name','$e_email','$e_dob','$e_age','$e_sex','$e_act','$e_doj','$e_did')";
                 if(mysqli_query($con,$q_emp)){
-                    echo"Employee record inserted";
                 
-                
-                // adding data to PAYROLL TABLE(P_ID,E_ID,Gross_Salary,Basic_Salary,ALLOWANCE,DEDUCTION,TAX,NET_SALARY)
-                
-                $p_id = mysqli_real_escape_string($con,$_POST['e_pid']);
-                $e_basic = mysqli_real_escape_string($con,$_POST['e_basic']);
-                $e_al = mysqli_real_escape_string($con,$_POST['e_al']);
-                $e_ded = mysqli_real_escape_string($con,$_POST['e_ded']);
-                $p_id = mysqli_real_escape_string($con,$_POST['e_pid']);
-                $e_tax = mysqli_real_escape_string($con,$_POST['e_tax']);
+                    // adding data to PAYROLL TABLE(P_ID,E_ID,Gross_Salary,Basic_Salary,ALLOWANCE,DEDUCTION,TAX,NET_SALARY)
+                    
+                    $p_id = mysqli_real_escape_string($con,$_POST['e_pid']);
+                    $e_basic = mysqli_real_escape_string($con,$_POST['e_basic']);
+                    $e_al = mysqli_real_escape_string($con,$_POST['e_al']);
+                    $e_ded = mysqli_real_escape_string($con,$_POST['e_ded']);
+                    $p_id = mysqli_real_escape_string($con,$_POST['e_pid']);
+                    $e_tax = mysqli_real_escape_string($con,$_POST['e_tax']);
 
-                $gross = $e_basic + $e_al ;
-                $net = $gross - $e_ded - $e_tax;
+                    $gross = $e_basic + $e_al ;
+                    $net = $gross - $e_ded - $e_tax;
 
-                $pay_query = "INSERT INTO PAYROLL (P_ID,E_ID,Gross_Salary,Basic_Salary,ALLOWANCE,DEDUCTION,TAX,NET_SALARY)
-                                VALUES('$p_id','$e_id','$gross','$e_basic','$e_al','$e_ded','$e_tax','$net')";
-                if(mysqli_query($con,$pay_query)){
-                    echo"Successfull PAyroll";
-                }else{
-                    echo"<html>
-            <script> 
-            alert('Failed Payroll entry');
-            </script>
-                </body>
-                </html>";
-                }
-                // now we have to insert corresponding records in LEAVE and PAYROLL TABLE
-                // initialiasing Leave(E_ID,FMLA,Maternity,Person)
-                $val = 0;
-                $q = "INSERT INTO LEAVE_RECORD (E_ID,FMLA,Maternity,Personal) VALUES('EMP01',$val,$val,$val)";
-                    if(mysqli_query($con,$q)){
-                        echo"Leave inserted ";
+                    $pay_query = "INSERT INTO PAYROLL (P_ID,E_ID,Gross_Salary,Basic_Salary,ALLOWANCE,DEDUCTION,TAX,NET_SALARY)
+                                    VALUES('$p_id','$e_id','$gross','$e_basic','$e_al','$e_ded','$e_tax','$net')";
+                    if(mysqli_query($con,$pay_query)){
                     }else{
                         echo"<html>
-            <script> 
-            alert('Leave Failed');
-            </script>
-                </body>
-                </html>";
+                            <script> 
+                            alert('Failed Payroll entry');
+                            </script>
+                                </body>
+                                </html>";
                     }
+                            // now we have to insert corresponding records in LEAVE and PAYROLL TABLE
+                            // initialiasing Leave(E_ID,FMLA,Maternity,Person)
+                            $val = 0;
+                    $q = "INSERT INTO LEAVE_RECORD (E_ID,FMLA,Maternity,Personal) VALUES('$e_id',$val,$val,$val)";
+                    if(mysqli_query($con,$q)){  
+                        
+                        
+                        //adding entry to RECEIPTS TABLE
+
+                        echo"<html>
+                                        <script> 
+                                        alert('Successfully inserted!');
+                                        </script>
+                                            </body>
+                                            </html>";    
+                    }else{
+                                    echo"<html>
+                                        <script> 
+                                        alert('Leave Failed');
+                                        </script>
+                                            </body>
+                                            </html>";
+                                }
 
             }else{
                 echo"<html>
@@ -178,10 +184,21 @@
         $delete_id = mysqli_real_escape_string($con,$_POST['delete_id']);
         
         $query_id = "SELECT * FROM EMPLOYMENT WHERE E_ID='$delete_id' LIMIT 1";
-        if(mysqli_query($con,$query_id)){
+        
+            $del_leave = "DELETE FROM LEAVE_RECORD WHERE E_ID='$delete_id'";
+            $del_payroll = "DELETE FROM PAYROLL WHERE E_ID='$delete_id'";
             $del = "DELETE FROM EMPLOYEE WHERE E_ID='$delete_id'";
-            if(mysqli_query($con,$del)){
-                echo"succesfully deleted";
+            if(mysqli_query($con,$del_payroll)){
+                if(mysqli_query($con,$del_leave)){  
+                    if(mysqli_query($con,$del)){
+                        echo"<html>
+                            <script> 
+                            alert('Successfully Deleted!');
+                            </script>
+                            </body>
+                            </html>";
+                
+
             }else{
                 echo"<html>
             <script> 
@@ -190,7 +207,8 @@
                 </body>
                 </html>";
             } 
-        }else{
+        }
+        else{
             echo"<html>
             <script> 
             alert('Employee does not exists);
@@ -199,15 +217,15 @@
                 </html>";
         }
 
-    }
+            }
 
+        }
     /////////////////////////////////SEARCH (view.php)////////////////////////////////
 
     if(isset($_POST['search'])){
         $s_id = mysqli_real_escape_string($con,$_POST['search_id']);
-        $s_name = mysqli_real_escape_string($con,$_POST['search_name']);
 
-        if(empty($s_id) && empty($s_name)){
+        if(empty($s_id)){
             echo"<html>
             <script> 
             alert('Input Required!');
@@ -234,26 +252,7 @@
             }
         }
           
-        }else if(!empty($s_name)){
-            $find = "SELECT * FROM EMPLOYEE WHERE E_Name='$s_name'";  // query so that it contains all info (PAYROLL,LEaVE_RECORD)
-            $result = mysqli_query($con,$find);
-            if(mysqli_num_rows($result)>0){
-                while($row = mysqli_fetch_assoc($result)){
-                    echo "<table style='position:fixed;top:600px;left:50px;'>
-                    <tr><th>ID</th><th>Name</th><th>Email</th></tr>";
-                    while($row = mysqli_fetch_assoc($result)){
-                        echo "<tr><td>".$row['E_ID']."</td><td>".$row['E_Name']."</td><td>".$row['Email']."</td></tr>";
-                    }
-                    echo"</table";
-                }
-            }else{
-                echo"<html>
-            <script> 
-            alert('0 Rows : No such Employee');
-            </script>
-                </body>
-                </html>";
-            }
+        
            
     }
 

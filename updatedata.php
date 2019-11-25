@@ -90,11 +90,13 @@ input[type=date]:focus {
     </div>
 
 <?php
-    // include('update.php');
-	$u_id = $_REQUEST['update_id'];
-	$sql = "SELECT * FROM PAYROLL WHERE P_ID ='$u_id'";
-	$run = mysqli_query($con, $sql);
-	$data = mysqli_fetch_assoc($run);
+   if(isset($_POST['update_payroll'])){
+    
+        $u_id = mysqli_real_escape_string($con,$_POST['update_id']);
+        $sql = "SELECT * FROM PAYROLL WHERE P_ID ='$u_id'";
+        $run = mysqli_query($con, $sql);
+        $data = mysqli_fetch_assoc($run);
+   }
 ?>
 
 
@@ -106,7 +108,7 @@ input[type=date]:focus {
             ?>
             <label  style='color:#555;'>&nbsp;Employee ID &nbsp;&nbsp;&nbsp;&nbsp;:</label> 
             <br> 
-            <input style='font-size:20px;height:33px;'type = 'text' name='up_eid' value=<?php echo $data['E_ID'] ?> >
+            <input style='font-size:20px;height:33px;'type = 'text' name='up_eid' value="EMP01"  >
             <br>
             <label  style='color:#555;'>&nbsp;Bank Account :</label>  
             <br>
